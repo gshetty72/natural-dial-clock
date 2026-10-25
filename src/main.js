@@ -78,9 +78,7 @@ async function main() {
   }
 
   let size  = dialSize();
-  const appEl    = document.getElementById('app');
-  const dialGfx = new Graphics();
-  app.stage.addChildAt(dialGfx, 0);
+  const appEl = document.getElementById('app');
 
   // ── PixiJS app ───────────────────────────────────────────────────────────────
   const app = new Application();
@@ -135,6 +133,10 @@ async function main() {
       },
     },
   });
+
+  // ── Dial ring and handle graphics ────────────────────────────────────────────
+  const dialGfx = new Graphics();
+  app.stage.addChildAt(dialGfx, 0);
 
   // ── Leaf mesh ────────────────────────────────────────────────────────────────
   let leafSize = size * 0.72;
