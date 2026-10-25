@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Natural Dial Clock</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body {
+        width: 100%; height: 100%;
+        background: #1a1a18;
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
+        font-family: system-ui, sans-serif;
+      }
+
+      #app { position: relative; }
+      #app canvas { display: block; touch-action: none; }
+
+      /* Figma dial ring SVG — sized by JS */
+      #dialRing {
+        position: absolute;
+        top: 0; left: 0;
+        pointer-events: none;
+        display: block;
+      }
+
+      #debug {
+        display: none;
+        position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+        background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 12px; padding: 12px 20px; color: #fff;
+        font-size: 13px; z-index: 100;
+        gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center;
+        min-width: 280px;
+      }
+      #debug.visible { display: flex; }
+      #debug label { display: flex; gap: 8px; align-items: center; }
+      #angleSlider { width: 160px; accent-color: #f90; }
+      #debugTap { position: fixed; bottom: 0; right: 0; width: 44px; height: 44px; z-index: 99; }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Figma dial ring SVG — behind canvas, pointer-events:none -->
+      <img id="dialRing" alt="" />
+    </div>
+
+    <div id="debug">
+      <label>Angle <input id="angleSlider" type="range" min="0" max="359" step="1" value="0" /></label>
+      <label><input id="overlayToggle" type="checkbox" /> Overlay</label>
+      <span id="angleReadout">0°</span>
+    </div>
+    <div id="debugTap"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
