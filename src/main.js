@@ -13,7 +13,17 @@ import { VERT, FRAG }  from './shaders.js';
 const BASE = import.meta.env.BASE_URL;
 
 // Set background image via JS so BASE_URL resolves correctly in both dev and prod
-document.body.style.background = `#7a7054 url('${BASE}background.png') center/cover no-repeat`;
+// Scale background to cover + 8% overshoot so transparent PNG edges are always off-screen
+const BG_IMG_W = 2848, BG_IMG_H = 1916;
+function updateBackground() {
+  const scale = Math.max(window.innerWidth / BG_IMG_W, window.innerHeight / BG_IMG_H) * 1.08;
+  document.body.style.backgroundSize = `${Math.round(BG_IMG_W * scale)}px ${Math.round(BG_IMG_H * scale)}px`;
+}
+document.body.style.backgroundImage = `url('${BASE}background.png')`;
+document.body.style.backgroundPosition = 'center';
+document.body.style.backgroundRepeat = 'no-repeat';
+updateBackground();
+window.addEventListener('resize', updateBackground);
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const MARGIN    = 0.14;
