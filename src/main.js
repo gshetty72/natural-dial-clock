@@ -13,9 +13,7 @@ import { VERT, FRAG }  from './shaders.js';
 const BASE = import.meta.env.BASE_URL;
 
 // Set background image via JS so BASE_URL resolves correctly in both dev and prod
-document.body.style.backgroundImage = `url('${BASE}background.png')`;
-document.body.style.backgroundSize = '108%';
-document.body.style.backgroundPosition = 'center';
+document.body.style.background = `#7a7054 url('${BASE}background.png') center/cover no-repeat`;
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 const MARGIN    = 0.14;
