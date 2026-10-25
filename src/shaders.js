@@ -86,7 +86,7 @@ void main() {
   // Multiplying any colour by it gives that colour the fall leaf's detail.
   float fallLum   = luma(fallFull);
   float fallLFLum = max(luma(falLF), 0.04);
-  float hfRatio   = fallLum / fallLFLum;   // >1 = bright spot, <1 = dark vein
+  float hfRatio   = clamp(fallLum / fallLFLum, 0.35, 2.5); // clamped to prevent dark-edge artifacts on bright seasons
 
   // Recolour each season using fall's detail map
   vec3 summerColored     = clamp(sumLF * hfRatio, 0.0, 1.3);
