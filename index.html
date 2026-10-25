@@ -17,13 +17,6 @@
       #app { position: relative; }
       #app canvas { display: block; touch-action: none; }
 
-      /* Figma dial ring SVG — sized by JS */
-      #dialRing {
-        position: absolute;
-        top: 0; left: 0;
-        pointer-events: none;
-        display: block;
-      }
 
       #debug {
         display: none;
@@ -42,8 +35,6 @@
   </head>
   <body>
     <div id="app">
-      <!-- Figma dial ring SVG — behind canvas, pointer-events:none -->
-      <img id="dialRing" alt="" />
     </div>
 
     <div id="debug">

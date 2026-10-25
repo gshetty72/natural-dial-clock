@@ -79,8 +79,8 @@ async function main() {
 
   let size  = dialSize();
   const appEl    = document.getElementById('app');
-  const dialRingEl = document.getElementById('dialRing');
-  dialRingEl.src = BASE + 'dial-ring.svg';
+  const dialGfx = new Graphics();
+  app.stage.addChildAt(dialGfx, 0);
 
   // ── PixiJS app ───────────────────────────────────────────────────────────────
   const app = new Application();
@@ -157,16 +157,17 @@ async function main() {
     return { outer, inner: outer * SVG_INNER_RATIO };
   }
 
-  // ── Ring SVG: scale down and centre ──────────────────────────────────────────
-  function updateRingEl() {
-    const ringPx = size * RING_SCALE;
-    const offset = (size - ringPx) / 2;
-    dialRingEl.style.width  = ringPx + 'px';
-    dialRingEl.style.height = ringPx + 'px';
-    dialRingEl.style.left   = offset + 'px';
-    dialRingEl.style.top    = offset + 'px';
+  // ── Draw ring: stroked circle matching the Figma design (#D9D9D9 @ 30%) ──────
+  function drawRing() {
+    const { outer, inner } = ringRadii();
+    const cx = size / 2, cy = size / 2;
+    const mid = (outer + inner) / 2;
+    const width = outer - inner;
+    dialGfx.clear();
+    dialGfx.circle(cx, cy, mid)
+           .stroke({ color: 0xD9D9D9, alpha: 0.3, width });
   }
-  updateRingEl();
+  drawRing();
 
   // ── Pointer / touch drag ─────────────────────────────────────────────────────
   function pointerAngle(e) {
@@ -239,7 +240,7 @@ async function main() {
     appEl.style.height = size + 'px';
     leaf.x = size / 2;
     leaf.y = size / 2;
-    updateRingEl();
+    drawRing();
   });
 }
 
