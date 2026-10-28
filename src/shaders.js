@@ -137,6 +137,6 @@ void main() {
                + winRaw.rgb * 0.15;
   }
 
-  outColor = vec4(finalColor, silhouette);
+  outColor = vec4(finalColor * silhouette, silhouette);
 }
 `;
